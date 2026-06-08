@@ -56,26 +56,25 @@
             color: #666;
         }
 
-        /* CRITICAL IMAGE HANDLING: Box ensures absolute safety against face cropping or distortion */
+        /* CRITICAL IMAGE HANDLING: Frameless configuration with layout safety preservation */
         .image-container {
             width: 100%;
             max-width: 320px;
             height: 280px;
             margin: 0 auto 20px auto;
-            border-radius: 16px;
-            overflow: hidden;
-            background-color: #ffe3e3;
-            box-shadow: 0 8px 24px rgba(216, 75, 107, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
+            background: transparent; /* Removed frame color background */
+            box-shadow: none;        /* Removed border frame shadow */
+            border-radius: 0;        /* Removed artificial frame curves */
         }
 
         .image-container img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Never cuts faces, maintains original proportions safely */
-            background-color: #ffe3e3; 
+            object-fit: contain; /* Safe fallback protects original dimensions without structural cropping */
+            background: transparent; 
         }
 
         /* --- SECTION SPECIFIC STYLES --- */
@@ -113,19 +112,18 @@
             max-width: 320px;
             height: 300px;
             margin: auto 0;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 12px 30px rgba(216, 75, 107, 0.2);
             display: flex;
             align-items: center;
             justify-content: center;
+            background: transparent;
+            box-shadow: none;
         }
 
         .hero-img-box img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            background-color: #fff;
+            background: transparent;
         }
 
         .scroll-down {
@@ -148,12 +146,6 @@
         #rapido h2 {
             color: #f59f00;
         }
-        #rapido .image-container {
-            background-color: #fff3bf;
-        }
-        #rapido .image-container img {
-            background-color: #fff3bf;
-        }
 
         /* 4. Shifting Gears */
         #shifting-gears {
@@ -162,19 +154,13 @@
         #shifting-gears h2 {
             color: #7048e8;
         }
-        #shifting-gears .image-container {
-            background-color: #e5dbff;
-        }
-        #shifting-gears .image-container img {
-            background-color: #e5dbff;
-        }
 
         /* 5. Memory Lane Slider Section */
         #memory-lane {
             background-color: #ffffff;
         }
         
-        /* Mobile-first Touch Slider Layout */
+        /* Mobile-first Touch Slider Layout - Frameless Design Elements */
         .slider-wrapper {
             position: relative;
             width: 100%;
@@ -195,16 +181,14 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #fafafa;
-            border-radius: 20px;
-            overflow: hidden;
+            background: transparent;
         }
 
         .slide img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Prevents user photos from stretching/cropping while swiping */
-            background-color: #fafafa;
+            object-fit: contain; /* Prevents visual face stretching during dynamic swiping actions */
+            background: transparent;
         }
 
         /* Navigation Dots */
@@ -234,7 +218,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.7);
             border: none;
             width: 36px;
             height: 36px;
@@ -244,11 +228,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             z-index: 10;
         }
-        .prev-btn { left: 8px; }
-        .next-btn { right: 8px; }
+        .prev-btn { left: 4px; }
+        .next-btn { right: 4px; }
 
         /* 6. Wish Wall */
         #wish-wall {
@@ -452,7 +435,6 @@
             const endX = e.changedTouches[0].clientX;
             const diffX = endX - startX;
 
-            // Trigger slide change if touch drag threshold exceeds 50 pixels
             if (Math.abs(diffX) > 50) {
                 if (diffX > 0) {
                     changeSlide(currentIndex - 1);
