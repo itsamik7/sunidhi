@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Sunidhi!</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- RESET & GLOBAL STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #fff5f5;
+            color: #4a4a4a;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* --- REUSABLE UTILITIES --- */
+        .section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        h2 {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: #d84b6b;
+            margin-bottom: 16px;
+        }
+
+        p {
+            font-size: 0.95rem;
+            max-width: 340px;
+            margin: 0 auto 24px auto;
+            color: #666;
+        }
+
+        /* CRITICAL IMAGE HANDLING: Box ensures absolute safety against face cropping or distortion */
+        .image-container {
+            width: 100%;
+            max-width: 320px;
+            height: 280px;
+            margin: 0 auto 20px auto;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #ffe3e3;
+            box-shadow: 0 8px 24px rgba(216, 75, 107, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Never cuts faces, maintains original proportions safely */
+            background-color: #ffe3e3; 
+        }
+
+        /* --- SECTION SPECIFIC STYLES --- */
+
+        /* 1. Hero Section */
+        #hero {
+            background: linear-gradient(135deg, #ffdeeb 0%, #fed6e3 100%);
+            justify-content: space-between;
+            padding-bottom: 40px;
+        }
+
+        .hero-title {
+            margin-top: auto;
+        }
+
+        .hero-title h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.6rem;
+            color: #d84b6b;
+            line-height: 1.1;
+            margin-bottom: 8px;
+            animation: heartbeat 1.5s infinite alternate;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #9c6270;
+            font-weight: 600;
+        }
+
+        .hero-img-box {
+            width: 100%;
+            max-width: 320px;
+            height: 300px;
+            margin: auto 0;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(216, 75, 107, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background-color: #fff;
+        }
+
+        .scroll-down {
+            font-size: 0.9rem;
+            color: #d84b6b;
+            text-decoration: none;
+            font-weight: 600;
+            animation: bounce 2s infinite;
+        }
+
+        /* 2. The Beginning */
+        #beginning {
+            background-color: #ffffff;
+        }
+
+        /* 3. The Rapido Era */
+        #rapido {
+            background-color: #fff9db;
+        }
+        #rapido h2 {
+            color: #f59f00;
+        }
+        #rapido .image-container {
+            background-color: #fff3bf;
+        }
+        #rapido .image-container img {
+            background-color: #fff3bf;
+        }
+
+        /* 4. Shifting Gears */
+        #shifting-gears {
+            background-color: #f3f0ff;
+        }
+        #shifting-gears h2 {
+            color: #7048e8;
+        }
+        #shifting-gears .image-container {
+            background-color: #e5dbff;
+        }
+        #shifting-gears .image-container img {
+            background-color: #e5dbff;
+        }
+
+        /* 5. Memory Lane Slider Section */
+        #memory-lane {
+            background-color: #ffffff;
+        }
+        
+        /* Mobile-first Touch Slider Layout */
+        .slider-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.4s ease-out;
+            cursor: grab;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #fafafa;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Prevents user photos from stretching/cropping while swiping */
+            background-color: #fafafa;
+        }
+
+        /* Navigation Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .dot {
+            width: 100%;
+            max-width: 24px;
+            height: 6px;
+            background-color: #e0e0e0;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: #d84b6b;
+            max-width: 36px;
+        }
+
+        /* Navigation Arrows */
+        .nav-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            color: #d84b6b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            z-index: 10;
+        }
+        .prev-btn { left: 8px; }
+        .next-btn { right: 8px; }
+
+        /* 6. Wish Wall */
+        #wish-wall {
+            background: linear-gradient(180deg, #ffffff 0%, #ffdeeb 100%);
+            justify-content: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 32px 24px;
+            border-radius: 24px;
+            box-shadow: 0 10px 32px rgba(216, 75, 107, 0.12);
+            max-width: 340px;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .date-badge {
+            display: inline-block;
+            background-color: #d84b6b;
+            color: white;
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .signature {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: #d84b6b;
+            margin-top: 20px;
+            line-height: 1.2;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes heartbeat {
+            to { transform: scale(1.03); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-8px); }
+            60% { transform: translateY(-4px); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="section" id="hero">
+        <div class="hero-title">
+            <h1>Happy Birthday,<br>Sunidhi!</h1>
+            <span class="hero-subtitle">Our Digital Storybook</span>
+        </div>
+
+        <div class="hero-img-box">
+            <img src="sunidhi_hero.jpg" alt="Sunidhi Birthday Cover">
+        </div>
+
+        <a href="#beginning" class="scroll-down">Tap to Flip Page ↓</a>
+    </section>
+
+
+    <section class="section" id="beginning">
+        <h2>The Beginning</h2>
+        
+        <div class="image-container">
+            <img src="sunidhi1.jpg" alt="Happiness Programme Days">
+        </div>
+
+        <p>It all started back at the <strong>Happiness Programme</strong>. To be completely honest, we were practically total strangers back then, completely unaware of the beautiful, chaotic friendship waiting down the road!</p>
+        
+        <a href="#rapido" class="scroll-down">Next Chapter ↓</a>
+    </section>
+
+
+    <section class="section" id="rapido">
+        <h2>The "Rapido" Era</h2>
+        
+        <div class="image-container">
+            <img src="sunidhi2.jpg" alt="Sunidhi Scooty Days">
+        </div>
+
+        <p>Then came the unforgettable <strong>Mahakumbh</strong> days, where everything shifted! You officially stepped up as my go-to "Rapido," weaving through crazy traffic, giving me scooty lifts, and saving the day multiple times.</p>
+        
+        <a href="#shifting-gears" class="scroll-down">Moving Forward ↓</a>
+    </section>
+
+
+    <section class="section" id="shifting-gears">
+        <h2>Shifting Gears</h2>
+        
+        <div class="image-container">
+            <img src="sunidhi3.jpg" alt="DSN and AMP Journey">
+        </div>
+
+        <p>From simple local rides to genuine life shifts—we tackled <strong>DSN</strong> together, broke comfort zones, and traveled all the way to Bangalore for <strong>AMP</strong>. Growing side-by-side with you has been an absolute privilege.</p>
+        
+        <a href="#memory-lane" class="scroll-down">View Shared Moments ↓</a>
+    </section>
+
+
+    <section class="section" id="memory-lane">
+        <h2>Memory Lane</h2>
+        <p style="margin-bottom: 12px;">Swipe across or tap arrows to view some favorite highlights!</p>
+        
+        <div class="slider-wrapper">
+            <button class="nav-btn prev-btn" aria-label="Previous image">‹</button>
+            <button class="nav-btn next-btn" aria-label="Next image">›</button>
+            
+            <div class="slider-container" id="slider">
+                <div class="slide"><img src="slider1.jpg" alt="Memory Moment 1"></div>
+                <div class="slide"><img src="slider2.jpg" alt="Memory Moment 2"></div>
+                <div class="slide"><img src="slider3.jpg" alt="Memory Moment 3"></div>
+                <div class="slide"><img src="slider4.jpg" alt="Memory Moment 4"></div>
+            </div>
+        </div>
+        
+        <div class="slider-dots" id="dotsContainer"></div>
+
+        <a href="#wish-wall" class="scroll-down" style="margin-top: 24px;">The Final Note ↓</a>
+    </section>
+
+
+    <section class="section" id="wish-wall">
+        <div class="card">
+            <span class="date-badge">June 29th</span>
+            <h2>Happy Birthday!</h2>
+            <p>Sunidhi, thank you for being such an exceptionally dependable, kind, and brilliant friend. From quiet strangers to travel partners and milestone builders, I value every phase of our friendship.</p>
+            <p>May this year reward you with ultimate joy, amazing breakthroughs, and endless laugh-out-loud moments!</p>
+            <div class="signature">With love,<br>[Your Name]</div>
+        </div>
+    </section>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        const dotsContainer = document.getElementById('dotsContainer');
+        
+        let currentIndex = 0;
+        let startX = 0;
+        let currentTranslate = 0;
+        let isDragging = false;
+
+        // Initialize Pagination Dots Dynamic Layout
+        slides.forEach((_, index) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if(index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => changeSlide(index));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function changeSlide(index) {
+            currentIndex = index;
+            if (currentIndex < 0) currentIndex = slides.length - 1;
+            if (currentIndex >= slides.length) currentIndex = 0;
+            updateSlider();
+        }
+
+        // Button Listeners
+        prevBtn.addEventListener('click', () => changeSlide(currentIndex - 1));
+        nextBtn.addEventListener('click', () => changeSlide(currentIndex + 1));
+
+        // Touch gestures for mobile phone browsing compatibility
+        slider.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            slider.style.transition = 'none';
+        });
+
+        slider.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const currentX = e.touches[0].clientX;
+            const diffX = currentX - startX;
+            const totalWidth = slider.parentElement.offsetWidth;
+            currentTranslate = -currentIndex * totalWidth + diffX;
+            slider.style.transform = `translateX(${currentTranslate}px)`;
+        });
+
+        slider.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            slider.style.transition = 'transform 0.3s ease-out';
+            const endX = e.changedTouches[0].clientX;
+            const diffX = endX - startX;
+
+            // Trigger slide change if touch drag threshold exceeds 50 pixels
+            if (Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    changeSlide(currentIndex - 1);
+                } else {
+                    changeSlide(currentIndex + 1);
+                }
+            } else {
+                updateSlider();
+            }
+        });
+    </script>
+</body>
+</html>
